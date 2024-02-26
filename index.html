@@ -1,16 +1,268 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Build Start</title>
-<link rel="stylesheet" herf="style.css">
-</head>
-<body>
-<h1>Project C:</h1>
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>HTML</title> 
 
-<h3>/Update Format/</h3>
-<p>1) User: /n</p>
-<p>2) Update Time: /n</p>
-<p>3) Detail: /n</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
+        integrity="sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+        integrity="sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-</body>
-</html>
+    <style> 
+        .num_1{
+            position: fixed;
+            left:10px;
+            top: 40px;
+        }
+        .num_2{
+            position: fixed;
+            left:400px;
+            top: 40px;
+        }
+        .method{
+            position: fixed;
+            left:270px;
+            top: 44px;
+        }
+        select{
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        input[type="button"] { 
+            width: 100%; 
+            background-color: black;
+            color: aliceblue;
+            padding: 14px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 5px;
+        } 
+        input[type="button"]:hover {
+            background-color:rgb(255, 253, 143);
+            color:blue;
+        }
+        input[type="text"] { 
+            padding: 14px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 5px; 
+            border: 2px solid black; 
+            text-align: right;
+        } 
+        .result{
+            font-size:36px;
+            position: fixed;
+            left: 660px;
+            top: 44px;
+            background-color:rgb(200, 200, 200);
+            border: none;
+            border-radius: 5px;
+        }
+        .result:hover{
+            background-color:rgb(235, 235, 235);
+        }
+
+        .output{
+            position: fixed;
+            left: 705px;
+            top: 42px;
+        }
+        
+        .clear{
+            position: fixed;
+            left: 705px;
+            top: 100px;
+            font-size: 16px;
+            padding: 10px;
+            color: white;
+            background-color: black;
+            border-radius: 5px;
+        }
+        .clear:hover{
+            background-color:rgb(100, 100, 100);
+        }
+    </style> 
+</head> 
+  
+<body> 
+
+    <table id="calcu_1" class="num_1"> 
+        <tr> 
+            <td colspan="3">
+                <input type="text" id="result_1"> 
+            </td> 
+        </tr> 
+  
+        <tr> 
+            <td><input type="button" id="t11" value="1" onclick="dis('1', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t12" value="2" onclick="dis('2', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t13" value="3" onclick="dis('3', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+        </tr>
+        <tr> 
+            <td><input type="button" id="t14" value="4" onclick="dis('4', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t15" value="5" onclick="dis('5', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t16" value="6" onclick="dis('6', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+        </tr> 
+        <tr> 
+            <td><input type="button" id="t17" value="7" onclick="dis('7', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t18" value="8" onclick="dis('8', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+            <td><input type="button" id="t19" value="9" onclick="dis('9', 'calcu_1')" onkeydown="displayNumbers(event)"></td> 
+        </tr> 
+        <tr> 
+            <td colspan="2"><input type="button" id="t10" value="0" onclick="dis('0', 'calcu_1')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t1c" value="c" onclick="clr()" /></td>
+        </tr> 
+    </table>
+
+    <select id="method_id" class="method">
+        <option id="">Method</option>
+        <option id="tplus" >+ PLUS</option>
+        <option id="tminus" >- MINUS</option>
+        <option id="tmult" >x MUL</option>
+        <option id="tdiv" >/ DIV</option>
+    </select>
+
+    <table id="calcu_2" class="num_2">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="result_2">
+            </td>
+        </tr>
+    
+        <tr>
+            <td><input type="button" id="t21" value="1" onclick="dis('1', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t22" value="2" onclick="dis('2', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t23" value="3" onclick="dis('3', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="t24" value="4" onclick="dis('4', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t25" value="5" onclick="dis('5', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t26" value="6" onclick="dis('6', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="t27" value="7" onclick="dis('7', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t28" value="8" onclick="dis('8', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t29" value="9" onclick="dis('9', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" id="t20" value="0" onclick="dis('0', 'calcu_2')" onkeydown="displayNumbers(event)"></td>
+            <td><input type="button" id="t2c" value="c" onclick="clr()"/></td>
+        </tr>
+    </table>
+    <button class="result">=</button>
+    <input class="output" type="text" id="result_3">
+    <button onclick="clearAll()" class="clear">Clear All</button>
+
+
+    <script>
+        var expression = "";
+        var lastActiveInput = "";
+
+        function setLastActiveInput(inputId) {
+            lastActiveInput = inputId;
+        }
+
+        function focusLastActiveInput() {
+            if (lastActiveInput !== "") {
+                document.getElementById(lastActiveInput).focus();
+            }
+        }
+
+        document.querySelector('.result').addEventListener('click', function () {
+            var num1 = parseFloat(document.getElementById("result_1").value);
+            var operator = document.getElementById("method_id").value;
+            var num2 = parseFloat(document.getElementById("result_2").value);
+
+            if (!isNaN(num1) && !isNaN(num2) && operator !== "choose method") {
+                var result;
+                switch (operator) {
+                    case '+ PLUS':
+                        result = num1 + num2;
+                        break;
+                    case '- MINUS':
+                        result = num1 - num2;
+                        break;
+                    case 'x MUL':
+                        result = num1 * num2;
+                        break;
+                    case '/ DIV':
+                        result = num1 / num2;
+                        break;
+                    default:
+                        result = 'Invalid operator';
+                }
+
+                document.getElementById("result_3").value = result;
+            } else {
+                document.getElementById("result_3").value = 'Invalid expression';
+            }
+        });
+
+        function dis(val, tableId) {
+            if (tableId === "calcu_1") {
+                document.getElementById("result_1").value += val;
+                setLastActiveInput("result_1");
+            } else if (tableId === "calcu_2") {
+                document.getElementById("result_2").value += val;
+                setLastActiveInput("result_2");
+            }
+        }
+
+        function displayNumbers(event) {
+            var method = document.getElementById("method_id").value;
+            if (method === "choose method" && /[0-9]/.test(event.key)) {
+                document.getElementById("result_1").value += event.key;
+                setLastActiveInput("result_1");
+            } else if (/[0-9]/.test(event.key)) {
+                document.getElementById("result_2").value += event.key;
+                setLastActiveInput("result_2");
+            }
+        }
+
+        var cal1 = document.getElementById("calcu_1");
+        cal1.onkeyup = function (event) {
+            if (event.keyCode === 13) {
+                solve();
+            }
+        }
+
+        function solve() {
+            let x = document.getElementById("result_2").value;
+            let y = math.evaluate(x);
+            document.getElementById("result_2").value = y;
+            setLastActiveInput("result_2");
+        }
+
+        function clr() {
+            var method = document.getElementById("method_id").value
+            if (method === "choose method") {
+                document.getElementById("result_1").value = "";
+                setLastActiveInput("result_1");
+            } else {
+                document.getElementById("result_2").value = "";
+                setLastActiveInput("result_2");
+            }
+        }
+
+        document.querySelector('.result').addEventListener('click', function () {
+            solve();
+        });
+
+        function clearAll() {
+            document.getElementById("result_1").value = "";
+            document.getElementById("result_2").value = "";
+            document.getElementById("result_3").value = "";
+            setLastActiveInput("");
+            focusLastActiveInput(); 
+        }    
+    </script>
+</body> 
+  
+</html> 
